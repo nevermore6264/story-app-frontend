@@ -3,8 +3,8 @@
 
 import { useRouter } from "next/navigation"; // Correct import for app directory
 import axios from "axios";
-import styles from "./login.module.css"; // Import CSS module for styling
 import Footer from "../components/Footer"; // Import the Footer component
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 
 export default function Login() {
   const router = useRouter();
@@ -35,26 +35,40 @@ export default function Login() {
   };
 
   return (
-    <div className={styles.page}>
-      <div className={styles.loginContainer}>
-        <h1 className={styles.title}>Đăng nhập</h1>
-        <form onSubmit={handleLogin} className={styles.loginForm}>
-          <input
-            name="email"
-            type="text"
-            placeholder="Vui lòng nhập email"
-            className={styles.input}
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Vui lòng nhập mật khẩu"
-            className={styles.input}
-          />
-          <button type="submit" className={styles.loginButton}>
-            Login
-          </button>
-        </form>
+    <div className="d-flex flex-column min-vh-100">
+      <div className="flex-grow-1 d-flex align-items-center justify-content-center">
+        <div className="container d-flex flex-column align-items-center justify-content-center">
+          <h1 className="mb-4">Đăng nhập</h1>
+          <form onSubmit={handleLogin} className="w-50">
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                name="email"
+                type="text"
+                id="email"
+                placeholder="Vui lòng nhập email"
+                className="form-control"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Mật khẩu
+              </label>
+              <input
+                name="password"
+                type="password"
+                id="password"
+                placeholder="Vui lòng nhập mật khẩu"
+                className="form-control"
+              />
+            </div>
+            <button type="submit" className="btn btn-primary w-100">
+              Đăng nhập
+            </button>
+          </form>
+        </div>
       </div>
       <Footer />
     </div>
