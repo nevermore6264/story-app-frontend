@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import Header from "./components/header";
-import Footer from "./components/footer";
+import Header from "./components/header/page";
+import Footer from "./components/footer/page"; // Adjusted import path
 import styles from "./page.module.css";
 
 export default function Home() {

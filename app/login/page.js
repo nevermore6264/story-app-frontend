@@ -3,7 +3,7 @@
 
 import { useRouter } from "next/navigation"; // Correct import for app directory
 import axios from "axios";
-import Footer from "../components/Footer"; // Import the Footer component
+import Footer from "../components/footer/page"; // Adjusted import path
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 
 export default function Login() {
@@ -48,7 +48,7 @@ export default function Login() {
                 name="email"
                 type="text"
                 id="email"
-                placeholder="Vui lòng nhập email"
+                placeholder="Vui lòng nhập email - Example: user1@example.com"
                 className="form-control"
               />
             </div>
@@ -60,7 +60,7 @@ export default function Login() {
                 name="password"
                 type="password"
                 id="password"
-                placeholder="Vui lòng nhập mật khẩu"
+                placeholder="Vui lòng nhập mật khẩu - Example: user123"
                 className="form-control"
               />
             </div>
