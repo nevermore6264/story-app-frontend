@@ -65,12 +65,12 @@ export default function Home() {
           <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
             Danh sách truyện
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="d-flex flex-wrap">
             {stories.map((story) => (
               <div key={story.id} className={styles.storyItem}>
                 <h2 className={styles.storyTitle}>{story.title}</h2>
                 <p className={styles.storyContent}>{story.content}</p>
-                <div className="flex justify-between items-center">
+                <div className="d-flex justify-content-between align-items-center">
                   <a href={`/story/${story.id}`} className={styles.readMore}>
                     Đọc thêm
                   </a>

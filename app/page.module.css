@@ -13,6 +13,8 @@
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1 1 calc(33.333% - 16px); /* Flex basis for 3 items per row */
+  margin: 8px;
 }
 
 .storyTitle {
@@ -58,7 +60,6 @@
   background-color: #0056b3;
 }
 
-/* Add cassette tape style */
 .listenButton::before {
   content: "";
   display: inline-block;
