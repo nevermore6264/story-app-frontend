@@ -1,8 +1,8 @@
+/* styles/page.module.css */
 .page {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f9fafb;
+  min-height: 100vh;
 }
 
 .main {
@@ -10,28 +10,45 @@
   padding: 2rem;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 
 .storyItem {
-  border-bottom: 1px solid #ddd;
-  padding: 16px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  overflow: hidden; /* Ensure overflow is hidden */
 }
 
 .storyTitle {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  margin-bottom: 0.5rem;
 }
 
 .storyContent {
-  margin: 8px 0;
-  color: #666;
+  color: #555;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Number of lines to show before truncating */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis (...) */
 }
 
 .readMore {
-  color: #1d72b8;
+  display: inline-block;
+  margin-top: 1rem;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.readMore:hover {
   text-decoration: underline;
 }

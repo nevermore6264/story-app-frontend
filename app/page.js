@@ -44,7 +44,7 @@ export default function Home() {
           <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
             Danh sách truyện
           </h1>
-          <div className="space-y-4">
+          <div className={styles.gridContainer}>
             {stories.map((story) => (
               <div key={story.id} className={styles.storyItem}>
                 <h2 className={styles.storyTitle}>{story.title}</h2>
