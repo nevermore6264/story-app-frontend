@@ -5,7 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Header from "./components/header/page";
-import Footer from "./components/footer/page"; // Adjusted import path
+import Footer from "./components/footer/page";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -36,6 +36,24 @@ export default function Home() {
     }
   }, [router]);
 
+  const handleReadAloud = (storyId) => {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      router.push("/login");
+    } else {
+      const audio = new Audio(
+        `http://localhost:4000/api/story/${storyId}/read-aloud`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      audio.play();
+    }
+  };
+
   return (
     <div className={styles.page}>
       <Header />
@@ -44,14 +62,22 @@ export default function Home() {
           <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
             Danh sách truyện
           </h1>
-          <div className={styles.gridContainer}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {stories.map((story) => (
               <div key={story.id} className={styles.storyItem}>
                 <h2 className={styles.storyTitle}>{story.title}</h2>
                 <p className={styles.storyContent}>{story.content}</p>
-                <a href={`/story/${story.id}`} className={styles.readMore}>
-                  Đọc thêm
-                </a>
+                <div className="flex justify-between items-center">
+                  <a href={`/story/${story.id}`} className={styles.readMore}>
+                    Đọc thêm
+                  </a>
+                  <button
+                    onClick={() => handleReadAloud(story.id)}
+                    className={styles.listenButton}
+                  >
+                    Nghe truyện
+                  </button>
+                </div>
               </div>
             ))}
           </div>
