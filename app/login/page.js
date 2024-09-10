@@ -1,8 +1,10 @@
+// app/login/page.js
 "use client";
 
 import { useRouter } from "next/navigation"; // Correct import for app directory
 import axios from "axios";
-import styles from "./login.module.css"; // Assuming you create a separate CSS module
+import styles from "./login.module.css"; // Import CSS module for styling
+import Footer from "../components/Footer"; // Import the Footer component
 
 export default function Login() {
   const router = useRouter();
@@ -33,10 +35,10 @@ export default function Login() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.loginBox}>
-        <h1 className={styles.heading}>Đăng nhập</h1>
-        <form onSubmit={handleLogin} className={styles.form}>
+    <div className={styles.page}>
+      <div className={styles.loginContainer}>
+        <h1 className={styles.title}>Đăng nhập</h1>
+        <form onSubmit={handleLogin} className={styles.loginForm}>
           <input
             name="email"
             type="text"
@@ -49,11 +51,12 @@ export default function Login() {
             placeholder="Vui lòng nhập mật khẩu"
             className={styles.input}
           />
-          <button type="submit" className={styles.button}>
-            Đăng nhập
+          <button type="submit" className={styles.loginButton}>
+            Login
           </button>
         </form>
       </div>
+      <Footer />
     </div>
   );
 }

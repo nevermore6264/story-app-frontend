@@ -1,16 +1,27 @@
-import Link from 'next/link';
-import styles from './header.module.css';
+// components/Header.js
+import Link from "next/link";
+import Image from "next/image"; // Import Image for the logo
 
 const Header = () => {
   return (
-    <header className={styles.header}>
+    <header className="bg-blue-500 text-white shadow-md border-b-2 border-blue-700">
       <div className="container mx-auto px-4 flex justify-between items-center py-4">
-        <Link href="/" className={styles.logo}>Trang Chủ</Link>
+        {/* Logo and Trang Chủ Link */}
+        <div className="flex items-center space-x-2">
+          <Image src="/logo.png" alt="Logo" width={40} height={40} />
+          <Link href="/" className="text-xl font-bold">
+            Trang Chủ
+          </Link>
+        </div>
+
+        {/* Đăng Nhập Button */}
         <nav>
-          <ul className="flex space-x-4">
-            <li><Link href="/" className={styles.navLink}>Danh sách Truyện</Link></li>
-            <li><Link href="/login" className={styles.navLink}>Đăng Nhập</Link></li>
-          </ul>
+          <Link
+            href="/login"
+            className="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+          >
+            Đăng Nhập
+          </Link>
         </nav>
       </div>
     </header>

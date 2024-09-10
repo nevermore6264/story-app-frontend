@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import styles from "./page.module.css";
+import "./globals.css";
 
 export default function Home() {
   const [stories, setStories] = useState([]);
