@@ -1,0 +1,26 @@
+.header {
+    background-color: #007bff; /* Thay đổi màu nền */
+    color: #ffffff; /* Màu chữ */
+    border-bottom: 2px solid #0056b3; /* Thêm đường viền dưới */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ nhẹ */
+  }
+  
+  .logo {
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff; /* Màu chữ cho logo */
+  }
+  
+  .navLink {
+    color: #ffffff; /* Màu chữ cho liên kết */
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px; /* Bo tròn các góc */
+  }
+  
+  .navLink:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+    text-decoration: none; /* Bỏ gạch chân khi hover */
+  }
+  
