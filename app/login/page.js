@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"; // Correct import for app directory
 import axios from "axios";
 import Footer from "../components/footer/page"; // Adjusted import path
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
+import Cookies from "js-cookie";
 
 export default function Login() {
   const router = useRouter();
@@ -22,10 +23,11 @@ export default function Login() {
         }
       );
 
-      const token = response.data.token;
+      const { token, email } = response.data;
 
-      // Store token in cookies
-      document.cookie = `token=${token}; path=/;`;
+      // Store token and email in cookies
+      Cookies.set("token", token, { path: "/" });
+      Cookies.set("email", email, { path: "/" });
 
       // Redirect to home page after login
       router.push("/");
