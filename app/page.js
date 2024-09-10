@@ -46,13 +46,28 @@ export default function Home() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          responseType: "arraybuffer", // Ensures the response is in binary format
         })
         .then((response) => {
-          const audio = new Audio(response.data);
-          audio.play();
+          // Convert response data to a Blob and create an object URL
+          const audioBlob = new Blob([response.data], { type: "audio/mpeg" });
+          const audioUrl = URL.createObjectURL(audioBlob);
+          const audio = new Audio(audioUrl);
+
+          // Check if the audio can play
+          audio.oncanplaythrough = () => {
+            audio.play();
+          };
+
+          // Handle errors in loading audio
+          audio.onerror = (error) => {
+            console.error("Error loading or playing audio:", error);
+            alert("Không thể phát âm thanh. Vui lòng thử lại sau.");
+          };
         })
         .catch((error) => {
           console.error("Error fetching story audio:", error);
+          alert("Có lỗi xảy ra khi tải âm thanh.");
         });
     }
   };
