@@ -10,6 +10,8 @@ import styles from "./page.module.css";
 
 export default function Home() {
   const [stories, setStories] = useState([]);
+  const [isPlaying, setIsPlaying] = useState(false); // Trạng thái phát âm thanh
+  const [playingStoryTitle, setPlayingStoryTitle] = useState(""); // Tiêu đề của câu chuyện đang phát
   const router = useRouter();
 
   useEffect(() => {
@@ -35,12 +37,15 @@ export default function Home() {
     }
   }, [router]);
 
-  const handleReadAloud = (storyId) => {
+  const handleReadAloud = (storyId, storyTitle) => {
     const token = Cookies.get("token");
 
     if (!token) {
       router.push("/login");
     } else {
+      setIsPlaying(true); // Đặt trạng thái là đang phát
+      setPlayingStoryTitle(storyTitle); // Cập nhật tiêu đề câu chuyện đang phát
+
       axios
         .get(`http://localhost:4000/api/story/${storyId}/read-aloud`, {
           headers: {
@@ -57,16 +62,24 @@ export default function Home() {
           // Check if the audio can play
           audio.oncanplaythrough = () => {
             audio.play();
+            audio.onended = () => {
+              setIsPlaying(false); // Đặt trạng thái là không còn phát nữa
+              setPlayingStoryTitle(""); // Xóa tiêu đề câu chuyện đang phát
+            };
           };
 
           // Handle errors in loading audio
           audio.onerror = (error) => {
             console.error("Error loading or playing audio:", error);
+            setIsPlaying(false); // Đặt trạng thái là không còn phát nữa
+            setPlayingStoryTitle(""); // Xóa tiêu đề câu chuyện đang phát
             alert("Không thể phát âm thanh. Vui lòng thử lại sau.");
           };
         })
         .catch((error) => {
           console.error("Error fetching story audio:", error);
+          setIsPlaying(false); // Đặt trạng thái là không còn phát nữa
+          setPlayingStoryTitle(""); // Xóa tiêu đề câu chuyện đang phát
           alert("Có lỗi xảy ra khi tải âm thanh.");
         });
     }
@@ -80,6 +93,11 @@ export default function Home() {
           <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
             Danh sách truyện
           </h1>
+          {isPlaying && (
+            <div className={styles.notification}>
+              Đang phát: {playingStoryTitle}
+            </div>
+          )}
           <div className="d-flex flex-wrap">
             {stories.map((story) => (
               <div key={story.id} className={styles.storyItem}>
@@ -90,7 +108,7 @@ export default function Home() {
                     Đọc thêm
                   </a>
                   <button
-                    onClick={() => handleReadAloud(story.id)}
+                    onClick={() => handleReadAloud(story.id, story.title)}
                     className={styles.listenButton}
                   >
                     Nghe truyện
