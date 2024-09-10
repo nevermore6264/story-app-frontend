@@ -64,7 +64,7 @@
   display: inline-block;
   width: 24px;
   height: 24px;
-  background-image: url("./mp3.jpg"); /* Replace with actual path */
+  background-image: url("./img/mp3.jpg"); /* Replace with actual path */
   background-size: cover;
   background-repeat: no-repeat;
   margin-right: 8px;

@@ -6,7 +6,7 @@ export default function Header() {
       <div className="container d-flex justify-content-between align-items-center">
         <Link href="/" className="text-white fs-4 text-decoration-none">
           <img
-            src="/logo.png"
+            src="../../img/logo.png"
             alt="Logo"
             width="30"
             height="30"
