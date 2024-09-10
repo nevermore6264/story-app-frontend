@@ -8,8 +8,8 @@ export default function Header() {
           <img
             src="../../img/logo.png"
             alt="Logo"
-            width="30"
-            height="30"
+            width="60"
+            height="60"
             className="me-2"
           />
           Trang Chủ
