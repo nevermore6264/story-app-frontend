@@ -1,52 +1,40 @@
 /* styles/page.module.css */
+
 .page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  font-family: Arial, sans-serif;
 }
 
 .main {
-  flex: 1;
-  padding: 2rem;
-}
-
-.gridContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  padding: 20px;
 }
 
 .storyItem {
-  background: #fff;
-  border: 1px solid #ddd;
+  background-color: #f9f9f9;
   border-radius: 8px;
-  padding: 1.5rem;
+  padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  overflow: hidden; /* Ensure overflow is hidden */
 }
 
 .storyTitle {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .storyContent {
-  color: #555;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* Number of lines to show before truncating */
-  -webkit-box-orient: vertical;
+  font-size: 1rem;
+  color: #333;
   overflow: hidden;
-  text-overflow: ellipsis; /* Add ellipsis (...) */
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin-bottom: 8px;
 }
 
 .readMore {
-  display: inline-block;
-  margin-top: 1rem;
   color: #007bff;
   text-decoration: none;
-  font-weight: bold;
 }
 
 .readMore:hover {
@@ -57,12 +45,27 @@
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .listenButton:hover {
   background-color: #0056b3;
+}
+
+/* Add cassette tape style */
+.listenButton::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url("./mp3.jpg"); /* Replace with actual path */
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-right: 8px;
 }

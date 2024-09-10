@@ -14,7 +14,6 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Check if code is running on the client
       const token = Cookies.get("token");
 
       if (!token) {
@@ -42,15 +41,19 @@ export default function Home() {
     if (!token) {
       router.push("/login");
     } else {
-      const audio = new Audio(
-        `http://localhost:4000/api/story/${storyId}/read-aloud`,
-        {
+      axios
+        .get(`http://localhost:4000/api/story/${storyId}/read-aloud`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
-      audio.play();
+        })
+        .then((response) => {
+          const audio = new Audio(response.data);
+          audio.play();
+        })
+        .catch((error) => {
+          console.error("Error fetching story audio:", error);
+        });
     }
   };
 
