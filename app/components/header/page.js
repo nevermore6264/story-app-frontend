@@ -6,14 +6,22 @@ import { useState, useEffect } from "react";
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState(""); // Giả định bạn lưu tên người dùng trong cookie
+  const [userName, setUserName] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false); // Thêm trạng thái để kiểm tra admin
 
   useEffect(() => {
     const token = Cookies.get("token");
     const email = Cookies.get("email");
+    const role = Cookies.get("role"); // Giả định bạn lưu role của người dùng trong cookie
+
     if (token && email) {
       setIsLoggedIn(true);
       setUserName(email);
+
+      // Kiểm tra nếu role là admin
+      if (role === "admin") {
+        setIsAdmin(true);
+      }
     } else {
       setIsLoggedIn(false);
     }
@@ -22,6 +30,7 @@ export default function Header() {
   const handleLogout = () => {
     Cookies.remove("token"); // Xóa token khi đăng xuất
     Cookies.remove("email"); // Xóa email khi đăng xuất
+    Cookies.remove("role"); // Xóa role khi đăng xuất
     setIsLoggedIn(false);
     window.location.href = "/login";
   };
@@ -39,6 +48,17 @@ export default function Header() {
           />
           Trang Chủ
         </Link>
+
+        {/* Nếu là admin, hiển thị link "Quản lý truyện" */}
+        {isAdmin && (
+          <Link
+            href="/admin/manage-stories"
+            className="text-white fs-5 text-decoration-none me-4"
+          >
+            Quản lý truyện
+          </Link>
+        )}
+
         <div>
           {isLoggedIn ? (
             <div className="d-flex align-items-center">

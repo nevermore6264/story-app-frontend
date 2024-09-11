@@ -23,11 +23,12 @@ export default function Login() {
         }
       );
 
-      const { token, email } = response.data;
+      const { token, email, role } = response.data;
 
       // Store token and email in cookies
       Cookies.set("token", token, { path: "/" });
       Cookies.set("email", email, { path: "/" });
+      Cookies.set("role", role, { path: "/" });
 
       // Redirect to home page after login
       router.push("/");

@@ -51,15 +51,15 @@ export default function Home() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          responseType: "arraybuffer", // Ensures the response is in binary format
+          responseType: "arraybuffer", // Đảm bảo phản hồi ở định dạng nhị phân
         })
         .then((response) => {
-          // Convert response data to a Blob and create an object URL
+          // Chuyển đổi phản hồi thành Blob và tạo URL đối tượng âm thanh
           const audioBlob = new Blob([response.data], { type: "audio/mpeg" });
           const audioUrl = URL.createObjectURL(audioBlob);
           const audio = new Audio(audioUrl);
 
-          // Check if the audio can play
+          // Kiểm tra xem âm thanh có thể phát hay không
           audio.oncanplaythrough = () => {
             audio.play();
             audio.onended = () => {
@@ -68,7 +68,7 @@ export default function Home() {
             };
           };
 
-          // Handle errors in loading audio
+          // Xử lý lỗi khi tải âm thanh
           audio.onerror = (error) => {
             console.error("Error loading or playing audio:", error);
             setIsPlaying(false); // Đặt trạng thái là không còn phát nữa
@@ -94,8 +94,10 @@ export default function Home() {
             Danh sách truyện
           </h1>
           {isPlaying && (
-            <div className={styles.notification}>
-              Đang phát: {playingStoryTitle}
+            <div
+              className={`${styles.notification} bg-green-500 text-white p-4 rounded mb-4`}
+            >
+              <strong>Đang phát:</strong> {playingStoryTitle}
             </div>
           )}
           <div className="d-flex flex-wrap">
@@ -109,7 +111,7 @@ export default function Home() {
                   </a>
                   <button
                     onClick={() => handleReadAloud(story.id, story.title)}
-                    className={styles.listenButton}
+                    className={`${styles.listenButton} btn btn-primary`}
                   >
                     Nghe truyện
                   </button>
