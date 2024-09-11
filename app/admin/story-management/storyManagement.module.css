@@ -1,0 +1,78 @@
+.page {
+  padding: 20px;
+}
+
+.newStoryForm {
+  margin-bottom: 40px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.newStoryForm h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.newStoryForm input,
+.newStoryForm textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.newStoryForm button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.newStoryForm button:hover {
+  background-color: #218838;
+}
+
+.storyList {
+  margin-top: 40px;
+}
+
+.storyItem {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.storyItem h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.storyItem p {
+  font-size: 16px;
+  color: #666;
+}
+
+.storyItem button {
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #dc3545;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.storyItem button:hover {
+  background-color: #c82333;
+}
