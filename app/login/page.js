@@ -41,6 +41,14 @@ export default function Login() {
     <div className="d-flex flex-column min-vh-100">
       <div className="flex-grow-1 d-flex align-items-center justify-content-center">
         <div className="container d-flex flex-column align-items-center justify-content-center">
+          {/* Logo added before login title */}
+          <img
+            src="/img/logo.png"
+            alt="Logo"
+            width="120"
+            height="120"
+            className="mb-4" // Add some margin-bottom to create space below the logo
+          />
           <h1 className="mb-4">Đăng nhập</h1>
           <form onSubmit={handleLogin} className="w-50">
             <div className="mb-3">
