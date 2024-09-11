@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
