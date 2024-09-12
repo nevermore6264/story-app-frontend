@@ -102,6 +102,12 @@ export default function Register() {
               Đăng ký
             </button>
           </form>
+          <p className="mt-3">
+            Đã có tài khoản?
+            <a href="/login" className="text-primary">
+              Đăng nhập
+            </a>
+          </p>
         </div>
       </div>
       <Footer />
