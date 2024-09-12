@@ -41,7 +41,6 @@ export default function Login() {
     <div className="d-flex flex-column min-vh-100">
       <div className="flex-grow-1 d-flex align-items-center justify-content-center">
         <div className="container d-flex flex-column align-items-center justify-content-center">
-          {/* Logo added before login title */}
           <img
             src="/img/logo.png"
             alt="Logo"
@@ -79,6 +78,14 @@ export default function Login() {
               Đăng nhập
             </button>
           </form>
+
+          {/* Link to Register Page */}
+          <p className="mt-3">
+            Chưa có tài khoản?
+            <a href="/register" className="text-primary">
+              Đăng ký ngay
+            </a>
+          </p>
         </div>
       </div>
       <Footer />
