@@ -38,14 +38,20 @@ export default function Home() {
   }, [router]);
 
   const handleReadAloud = (storyId, storyTitle) => {
+    // Nếu đang phát thì không cho phép phát thêm
+    if (isPlaying) {
+      alert(`Câu chuyện "${storyTitle}" đang được phát. Vui lòng đợi kết thúc.`);
+      return;
+    }
+  
     const token = Cookies.get("token");
-
+  
     if (!token) {
       router.push("/login");
     } else {
       setIsPlaying(true); // Đặt trạng thái là đang phát
       setPlayingStoryTitle(storyTitle); // Cập nhật tiêu đề câu chuyện đang phát
-
+  
       axios
         .get(`http://localhost:4000/api/story/${storyId}/read-aloud`, {
           headers: {
@@ -58,7 +64,7 @@ export default function Home() {
           const audioBlob = new Blob([response.data], { type: "audio/mpeg" });
           const audioUrl = URL.createObjectURL(audioBlob);
           const audio = new Audio(audioUrl);
-
+  
           // Kiểm tra xem âm thanh có thể phát hay không
           audio.oncanplaythrough = () => {
             audio.play();
@@ -67,7 +73,7 @@ export default function Home() {
               setPlayingStoryTitle(""); // Xóa tiêu đề câu chuyện đang phát
             };
           };
-
+  
           // Xử lý lỗi khi tải âm thanh
           audio.onerror = (error) => {
             console.error("Error loading or playing audio:", error);
@@ -84,6 +90,7 @@ export default function Home() {
         });
     }
   };
+  
 
   return (
     <div className={styles.page}>
