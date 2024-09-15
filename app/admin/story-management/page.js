@@ -1,14 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./storyManagement.module.css";
 
 export default function StoryManagement() {
   const [stories, setStories] = useState([]);
   const [newStory, setNewStory] = useState({ title: "", content: "" });
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
   const router = useRouter();
 
   useEffect(() => {
@@ -18,20 +21,26 @@ export default function StoryManagement() {
     if (!token || role !== "Admin") {
       router.push("/login");
     } else {
-      axios
-        .get("http://localhost:4000/api/story", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          setStories(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching stories:", error);
-        });
+      fetchStories(); // Fetch all stories at once
     }
   }, [router]);
+
+  const fetchStories = () => {
+    const token = Cookies.get("token");
+
+    axios
+      .get("http://localhost:4000/api/story", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setStories(response.data.stories);
+      })
+      .catch((error) => {
+        console.error("Lỗi khi lấy truyện:", error);
+      });
+  };
 
   const handleCreateStory = () => {
     const token = Cookies.get("token");
@@ -52,7 +61,7 @@ export default function StoryManagement() {
           setNewStory({ title: "", content: "" });
         })
         .catch((error) => {
-          console.error("Error creating story:", error);
+          console.error("Lỗi khi tạo truyện:", error);
         });
     }
   };
@@ -70,9 +79,16 @@ export default function StoryManagement() {
         setStories(stories.filter((story) => story.id !== storyId));
       })
       .catch((error) => {
-        console.error("Error deleting story:", error);
+        console.error("Lỗi khi xóa truyện:", error);
       });
   };
+
+  // Pagination logic
+  const totalPages = Math.ceil(stories.length / pageSize);
+  const paginatedStories = stories.slice(
+    pageIndex * pageSize,
+    (pageIndex + 1) * pageSize
+  );
 
   return (
     <div className={styles.page}>
@@ -100,20 +116,75 @@ export default function StoryManagement() {
         </button>
       </div>
 
-      <div className={styles.storyList}>
-        <h2>Danh sách truyện</h2>
-        {stories.map((story) => (
-          <div key={story.id} className={styles.storyItem}>
-            <h3>{story.title}</h3>
-            <p>{story.content}</p>
-            <button
-              onClick={() => handleDeleteStory(story.id)}
-              className="btn btn-danger"
-            >
-              Xóa truyện
-            </button>
-          </div>
-        ))}
+      <table className="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th>Tiêu đề</th>
+            <th>Nội dung</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          {paginatedStories.map((story) => (
+            <tr key={story.id}>
+              <td>{story.title}</td>
+              <td>{story.content}</td>
+              <td>
+                <button
+                  onClick={() => handleDeleteStory(story.id)}
+                  className="btn btn-danger"
+                >
+                  Xóa
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div className="pagination mt-3">
+        <button
+          className="btn btn-primary me-2"
+          onClick={() => setPageIndex(0)}
+          disabled={pageIndex === 0}
+        >
+          {"<<"}
+        </button>
+        <button
+          className="btn btn-primary me-2"
+          onClick={() => setPageIndex(pageIndex - 1)}
+          disabled={pageIndex === 0}
+        >
+          {"<"}
+        </button>
+        <button
+          className="btn btn-primary me-2"
+          onClick={() => setPageIndex(pageIndex + 1)}
+          disabled={pageIndex === totalPages - 1}
+        >
+          {">"}
+        </button>
+        <button
+          className="btn btn-primary me-2"
+          onClick={() => setPageIndex(totalPages - 1)}
+          disabled={pageIndex === totalPages - 1}
+        >
+          {">>"}
+        </button>
+        <span className="mx-3">
+          Trang <strong>{pageIndex + 1}</strong> trên {totalPages}
+        </span>
+        <select
+          value={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+          className="form-select"
+        >
+          {[5, 10, 20].map((size) => (
+            <option key={size} value={size}>
+              Hiển thị {size}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
