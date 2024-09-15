@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
+import Snowflakes from "./components/snowflakes/page";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
+        <Snowflakes />
       </body>
     </html>
   );
