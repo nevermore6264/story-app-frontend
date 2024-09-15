@@ -35,7 +35,7 @@ export default function StoryManagement() {
         },
       })
       .then((response) => {
-        setStories(response.data.stories);
+        setStories(response.data);
       })
       .catch((error) => {
         console.error("Lỗi khi lấy truyện:", error);
@@ -92,10 +92,10 @@ export default function StoryManagement() {
 
   return (
     <div className={styles.page}>
-      <h1 className="text-3xl font-bold mb-4">Quản lý truyện</h1>
+      <h1 className={styles.pageTitle}>Quản lý truyện</h1>
 
       <div className={styles.newStoryForm}>
-        <h2>Tạo truyện mới</h2>
+        <h2 className={styles.newStoryFormTitle}>Tạo truyện mới</h2>
         <input
           type="text"
           placeholder="Tiêu đề truyện"
@@ -116,7 +116,7 @@ export default function StoryManagement() {
         </button>
       </div>
 
-      <table className="table table-bordered mt-4">
+      <table className={`table table-bordered mt-4 ${styles.table}`}>
         <thead>
           <tr>
             <th>Tiêu đề</th>
@@ -142,7 +142,7 @@ export default function StoryManagement() {
         </tbody>
       </table>
 
-      <div className="pagination mt-3">
+      <div className={`pagination mt-3 ${styles.pagination}`}>
         <button
           className="btn btn-primary me-2"
           onClick={() => setPageIndex(0)}
