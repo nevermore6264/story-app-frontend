@@ -52,7 +52,7 @@ export default function Header() {
         {/* Nếu là admin, hiển thị link "Quản lý truyện" */}
         {isAdmin && (
           <Link
-            href="/admin/story-management"
+            href="/components/story-management"
             className="text-white fs-5 text-decoration-none me-4"
           >
             Quản lý truyện
