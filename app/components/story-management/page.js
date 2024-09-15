@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./storyManagement.module.css";
 import Header from "../header/page";
 import Footer from "../footer/page";

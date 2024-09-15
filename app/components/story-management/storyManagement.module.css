@@ -8,7 +8,7 @@
 .pageTitle {
   text-align: center;
   color: #333;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .newStoryForm {
@@ -130,4 +130,8 @@
   margin: 0 10px;
   font-size: 1rem;
   font-weight: bold;
+}
+
+.form-select {
+  width: 150px;
 }
