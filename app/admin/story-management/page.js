@@ -15,7 +15,7 @@ export default function StoryManagement() {
     const token = Cookies.get("token");
     const role = Cookies.get("role");
 
-    if (!token || role !== "admin") {
+    if (!token || role !== "Admin") {
       router.push("/login");
     } else {
       axios
